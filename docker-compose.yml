@@ -1,0 +1,35 @@
+version: '2'
+services:
+  main:
+    build:
+      context: .
+    environment:
+      # This helps ES out with memory usage
+      - "ES_JAVA_OPTS=-Xmx512m -Xms512m"
+      - SERVICE_3036_NAME=clamav
+      - SERVICE_3036_CHECK_HTTP=/
+      - SERVICE_3036_CHECK_INTERVAL=15s
+      - SERVICE_3036_CHECK_TIMEOUT=3s
+    depends_on:
+      - registrator
+    ports:
+      - "8080:3036"
+
+  registrator:
+    image: gliderlabs/registrator
+    restart: on-failure
+    command: consul://consul:8500
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    depends_on:
+      - consul
+
+  consul:
+    image: consul:latest
+    ports:
+      - '8400:8400'
+      - '8500:8500'
+      - '8600:53/udp'
+    labels:
+      SERVICE_IGNORE: 'true'  # Do not add any of Consul's services to Consul's service discovery registry.
+    command: [agent, '-server', '-ui', '-bootstrap', '-client=0.0.0.0']
