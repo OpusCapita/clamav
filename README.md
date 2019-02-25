@@ -36,6 +36,7 @@ However, swarm would restart the instance once docker check fails.
 
 ## API
 
-```curl -F "name=blabla" -F "file=@./eicar.txt" clamav:3036/scan
+```
+curl -F "name=blabla" -F "file=@./eicar.txt" clamav:3036/scan
 Everything ok : false
 ```
