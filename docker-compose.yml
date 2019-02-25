@@ -5,7 +5,6 @@ services:
       context: .
     environment:
       # This helps ES out with memory usage
-      - "ES_JAVA_OPTS=-Xmx512m -Xms512m"
       - SERVICE_3036_NAME=clamav
       - SERVICE_3036_CHECK_HTTP=/
       - SERVICE_3036_CHECK_INTERVAL=15s
