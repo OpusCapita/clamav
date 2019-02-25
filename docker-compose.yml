@@ -5,14 +5,15 @@ services:
       context: .
     environment:
       # This helps ES out with memory usage
-      - SERVICE_3036_NAME=clamav
-      - SERVICE_3036_CHECK_HTTP=/
-      - SERVICE_3036_CHECK_INTERVAL=15s
-      - SERVICE_3036_CHECK_TIMEOUT=3s
+      - SERVICE_NAME=clamav
+      - SERVICE_CHECK_HTTP=/
+      - SERVICE_CHECK_INTERVAL=15s
+      - SERVICE_CHECK_TIMEOUT=3s
     depends_on:
       - registrator
     ports:
       - "3036:8080"
+      - "8080:8080"
 
   registrator:
     image: gliderlabs/registrator
