@@ -12,7 +12,7 @@ services:
     depends_on:
       - registrator
     ports:
-      - "8080:3036"
+      - "3036:8080"
 
   registrator:
     image: gliderlabs/registrator
