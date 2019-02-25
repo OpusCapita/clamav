@@ -5,7 +5,7 @@ while true; do
   rs=$?
   if (( $rs > 1 )) ; then
     echo "error updating db: $rs"
-  else if (( $rs = 1 )) ; then 
+  else if (( $rs == 1 )) ; then 
       echo "update check ok, nothing updated"
       touch updated.txt
     else 
